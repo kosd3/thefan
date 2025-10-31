@@ -49,6 +49,10 @@
             margin-bottom: 50px;
             color: #FDE047; /* Accent Yellow */
         }
+        
+        h2.subtitle-dark {
+            color: #FFFFFF;
+        }
 
         .btn {
             display: inline-block;
@@ -129,7 +133,7 @@
 
         /* 3. Hero Section */
         .hero {
-            padding-top: 180px; /* Account for fixed header */
+            padding-top: 140px; /* Account for fixed header - Reduced from 180px */
             height: 100vh;
             min-height: 700px;
             display: flex;
@@ -158,14 +162,14 @@
             max-width: 550px;
         }
 
-        /* 4. Fandom Land Feature Section */
+        /* 4. Fandom Land Feature Section --- MODIFIED FOR 4 COLUMNS --- */
         .feature-fandom-land {
             background-color: #1A1A2E; /* Darker Purple/Blue */
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr); /* <-- CHANGED FROM 3 to 4 */
             gap: 30px;
             text-align: center;
         }
@@ -194,8 +198,162 @@
             color: #FFFFFF;
             margin-bottom: 15px;
         }
+        
+        /* Reduce font size slightly for 4 items */
+        .feature-item h3 {
+             font-size: 1.3rem;
+        }
+        .feature-item p {
+             font-size: 0.9rem;
+        }
 
-        /* 5. How It Works (User Roles) */
+
+        /* 5. Fandom Map Status */
+        .fandom-map-status {
+            background-color: #0F0B1A;
+        }
+        
+        .map-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .pixel-map {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(8px, 1fr));
+            grid-auto-flow: dense;
+            gap: 2px;
+            background: #000;
+            border: 2px solid #FDE047;
+            padding: 5px;
+            border-radius: 8px;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .pixel {
+            width: 100%;
+            padding-bottom: 100%; /* Aspect ratio 1:1 */
+            background: #333;
+        }
+        
+        /* Fandom Colors (Example) */
+        .pixel-bts { background-color: #A020F0; } /* Purple */
+        .pixel-bp { background-color: #F56EB3; } /* Pink */
+        .pixel-nj { background-color: #00A9FF; } /* Blue */
+        .pixel-empty { background-color: #2a2a3a; }
+        
+        /* Example of large blocks */
+        .pixel.span-5 { grid-column: span 5; grid-row: span 5; }
+        .pixel.span-3 { grid-column: span 3; grid-row: span 3; }
+        .pixel.span-2 { grid-column: span 2; grid-row: span 2; }
+        
+        .map-legend h3 {
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            margin-right: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* 6. Hall of Fame */
+        .hall-of-fame {
+            background-color: #1A1A2E;
+        }
+
+        .hall-of-fame-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hall-of-fame p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #C0C0C0;
+            margin-top: -30px;
+            margin-bottom: 40px;
+        }
+
+        .leaderboard {
+            list-style: none;
+            width: 100%;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .leaderboard-item .rank {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            min-width: 50px;
+        }
+        
+        .leaderboard-item .artist {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .leaderboard-item .artist img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .leaderboard-item .pixels-owned {
+            font-family: 'Poppins', sans-serif;
+            color: #E0E0E0;
+        }
+        
+        /* Rank Colors */
+        .leaderboard-item.rank-1 {
+            border-color: #FDE047;
+            background: linear-gradient(90deg, rgba(253, 224, 71, 0.2), rgba(253, 224, 71, 0.05));
+        }
+        .leaderboard-item.rank-1 .rank { color: #FDE047; }
+        .leaderboard-item.rank-1 .artist { color: #FFFFFF; }
+
+        .leaderboard-item.rank-2 {
+            border-color: #C0C0C0;
+            background: linear-gradient(90deg, rgba(192, 192, 192, 0.2), rgba(192, 192, 192, 0.05));
+        }
+        .leaderboard-item.rank-2 .rank { color: #C0C0C0; }
+
+        .leaderboard-item.rank-3 {
+            border-color: #CD7F32;
+            background: linear-gradient(90deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.05));
+        }
+        .leaderboard-item.rank-3 .rank { color: #CD7F32; }
+
+
+        /* 7. How It Works (User Roles) */
         .how-it-works {
             text-align: center;
         }
@@ -248,7 +406,7 @@
             top: 0;
         }
 
-        /* 6. Global Marketing Section */
+        /* 8. Global Marketing Section */
         .global-marketing {
             background-color: #0F0B1A;
             text-align: center;
@@ -287,7 +445,7 @@
             font-size: 0.9rem;
         }
 
-        /* 7. Final CTA */
+        /* 9. Final CTA */
         .cta-final {
             background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), url('https://placehold.co/1920x500/0F0B1A/1A1A2E.png?text=Fandom+Battle+Visual') no-repeat center center/cover;
             text-align: center;
@@ -307,7 +465,7 @@
             margin-right: auto;
         }
 
-        /* 8. Footer */
+        /* 10. Footer */
         .footer {
             background-color: #000;
             padding: 40px 20px;
@@ -335,13 +493,19 @@
             font-size: 0.9rem;
         }
 
-        /* 9. Responsive Design */
+        /* 11. Responsive Design */
         @media (max-width: 992px) {
             h1 {
                 font-size: 3rem;
             }
             .feature-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr; /* 2x2 grid on tablets */
+            }
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+            .pixel-map {
+                height: 300px;
             }
             .roles-container {
                 flex-direction: column;
@@ -357,7 +521,7 @@
             }
             
             .hero {
-                padding-top: 220px; /* Adjust for taller header */
+                padding-top: 180px; /* Adjust for taller header */
                 text-align: center;
             }
 
@@ -387,7 +551,19 @@
             }
 
             .feature-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
+            
+            .leaderboard-item {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            .leaderboard-item .artist {
+                gap: 10px;
+            }
+            .leaderboard-item .artist img {
+                width: 30px;
+                height: 30px;
             }
         }
 
@@ -410,7 +586,7 @@
     <!-- 2. Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <div class="subtitle">Fandom Finance is Here</div>
+            <div class="subtitle">팬덤 전쟁터</div>
             <h1>아티스트를 빛낼<br>단 하나의 전쟁</h1>
             <p>
                 팬 활동과 금융이 결합된 새로운 생태계.
@@ -421,11 +597,16 @@
         </div>
     </section>
 
-    <!-- 3. Fandom Land Feature Section -->
+    <!-- 3. Fandom Land Feature Section -- MODIFIED -->
     <section id="fandom-land" class="feature-fandom-land">
         <div class="container">
             <h2>NFT 팬덤 랜드: Million Dollar Fandom Map</h2>
             <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <h3>데일리 출석체크</h3>
+                    <p>매일 출석체크하고 $TFN(Star) 포인트를 획득하세요. 팬덤 랜드 경쟁을 위한 실탄을 모으세요!</p>
+                </div>
                 <div class="feature-item">
                     <i class="fa-solid fa-th-large"></i>
                     <h3>픽셀 땅 구매 (NFT)</h3>
@@ -439,13 +620,118 @@
                 <div class="feature-item">
                     <i class="fa-solid fa-trophy"></i>
                     <h3>명예의 전당 & 기부</h3>
-                    <p>가장 많은 땅을 차지한 1등 아티스트는 명예의 전당에 오르며, 소각된 $TFN은 해당 아티스트의 이름으로 기부됩니다.</p>
+                    <p>1등 아티스트는 명예의 전당에 오르며, 소각된 $TFN은 해당 아티스트의 이름으로 기부됩니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. How It Works (User Roles) -->
+    <!-- 4. Fandom Map Status -->
+    <section class="fandom-map-status">
+        <div class="container">
+            <h2 class="subtitle-dark" style="text-align: center; margin-bottom: 50px;">실시간 팬덤 랜드 현황</h2>
+            <div class="map-container">
+                <div class="pixel-map">
+                    <!-- This is a simulation. A real implementation would generate this grid dynamically. -->
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-bts span-3" style="grid-column: span 4; grid-row: span 4;"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-nj span-2" style="grid-column: span 2; grid-row: span 3;"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-bp span-3" style="grid-column: span 3; grid-row: span 3;"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-bts" style="grid-column: span 1; grid-row: span 2;"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-nj"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-bp"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <div class="pixel pixel-bts span-2" style="grid-column: span 2; grid-row: span 2;"></div>
+                    <div class="pixel pixel-empty"></div>
+                    <!-- Fill with more empty pixels for visual effect -->
+                    <script>
+                        const map = document.querySelector('.pixel-map');
+                        for (let i = 0; i < 150; i++) {
+                            const pixel = document.createElement('div');
+                            pixel.classList.add('pixel', 'pixel-empty');
+                            if (Math.random() < 0.05) pixel.classList.add('pixel-bts');
+                            if (Math.random() < 0.03) pixel.classList.add('pixel-nj');
+                            if (Math.random() < 0.04) pixel.classList.add('pixel-bp');
+                            map.appendChild(pixel);
+                        }
+                    </script>
+                </div>
+                <div class="map-legend">
+                    <h3>Legend</h3>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #A020F0;"></div>
+                        <span>BTS Fandom</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #F56EB3;"></div>
+                        <span>BLACKPINK Fandom</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #00A9FF;"></div>
+                        <span>NewJeans Fandom</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #2a2a3a;"></div>
+                        <span>Available Land</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. Hall of Fame -->
+    <section id="hall-of-fame" class="hall-of-fame">
+        <div class="container hall-of-fame-content">
+            <h2>주간 명예의 전당</h2>
+            <p>가장 많은 땅을 차지한 1등 아티스트의 이름으로 $TFN(Star)이 기부됩니다.</p>
+            
+            <ol class="leaderboard">
+                <li class="leaderboard-item rank-1">
+                    <div class="rank"><i class="fa-solid fa-trophy"></i> 1</div>
+                    <div class="artist">
+                        <img src="https://placehold.co/50x50/A020F0/FFFFFF?text=BTS" alt="BTS">
+                        <span>BTS</span>
+                    </div>
+                    <div class="pixels-owned">12,408 픽셀</div>
+                </li>
+                <li class="leaderboard-item rank-2">
+                    <div class="rank"><i class="fa-solid fa-medal"></i> 2</div>
+                    <div class="artist">
+                        <img src="https://placehold.co/50x50/F56EB3/FFFFFF?text=BP" alt="BLACKPINK">
+                        <span>BLACKPINK</span>
+                    </div>
+                    <div class="pixels-owned">9,830 픽셀</div>
+                </li>
+                <li class="leaderboard-item rank-3">
+                    <div class="rank"><i class="fa-solid fa-award"></i> 3</div>
+                    <div class="artist">
+                        <img src="https://placehold.co/50x50/00A9FF/FFFFFF?text=NJ" alt="NewJeans">
+                        <span>NewJeans</span>
+                    </div>
+                    <div class="pixels-owned">7,110 픽셀</div>
+                </li>
+                <li class="leaderboard-item rank-4">
+                    <div class="rank">4</div>
+                    <div class="artist">
+                        <img src="https://placehold.co/50x50/FF6347/FFFFFF?text=SK" alt="Stray Kids">
+                        <span>Stray Kids</span>
+                    </div>
+                    <div class="pixels-owned">5,500 픽셀</div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 6. How It Works (User Roles) -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
             <h2>당신은 누구입니까?</h2>
@@ -484,7 +770,7 @@
         </div>
     </section>
 
-    <!-- 5. Global Marketing Section -->
+    <!-- 7. Global Marketing Section -->
     <section id="global" class="global-marketing">
         <div class="container">
             <h2>Global Fan Creators Network</h2>
@@ -496,13 +782,13 @@
                 <div class="partner">정승빈 & 깨방정 <span>(Korea)</span></div>
                 <div class="partner">일본 K-Pop 리뷰어 <span>(Japan)</span></div>
                 <div class="partner">필리핀 댄스 커버팀 <span>(Philippines)</span></div>
-                <div class="partner">인도네시아 팬 커뮤니티 <span>(Indonesia)</span></div>
+                <div class="partner">인도네시아 팬 커뮤니MTE <span>(Indonesia)</span></div>
                 <div class="partner">글로벌 팬덤 리더 <span>(Global)</span></div>
             </div>
         </div>
     </section>
 
-    <!-- 6. Final CTA -->
+    <!-- 8. Final CTA -->
     <section class="cta-final">
         <div class="container">
             <h2>지금, 팬덤 전쟁이 시작됩니다</h2>
@@ -515,7 +801,7 @@
         </div>
     </section>
 
-    <!-- 7. Footer -->
+    <!-- 9. Footer -->
     <footer class="footer">
         <div class="social-icons">
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -525,7 +811,53 @@
         </div>
         <p>&copy; 2025 THE FAN. All rights reserved. Fandom Finance Ecosystem.</p>
     </footer>
+    
+    <!-- Script for pixel map generation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const map = document.querySelector('.pixel-map');
+            if (map) {
+                // Clear placeholder script if any
+                const existingScript = map.querySelector('script');
+                if (existingScript) map.removeChild(existingScript);
+
+                // Add pre-defined blocks
+                const blocks = [
+                    { class: 'pixel-bts', style: 'grid-column: 1 / span 5; grid-row: 1 / span 5;' },
+                    { class: 'pixel-bp', style: 'grid-column: 6 / span 3; grid-row: 2 / span 3;' },
+                    { class: 'pixel-nj', style: 'grid-column: 10 / span 4; grid-row: 1 / span 4;' },
+                    { class: 'pixel-bts', style: 'grid-column: 2 / span 2; grid-row: 6 / span 2;' },
+                    { class: 'pixel-empty', style: 'grid-column: 8 / span 3; grid-row: 5 / span 3;' },
+                ];
+
+                blocks.forEach(block => {
+                    const pixel = document.createElement('div');
+                    pixel.classList.add('pixel', block.class);
+                    pixel.style = block.style;
+                    map.appendChild(pixel);
+                });
+
+                // Fill remaining space with small random pixels
+                for (let i = 0; i < 200; i++) { // Increase number for density
+                    const pixel = document.createElement('div');
+                    pixel.classList.add('pixel');
+                    
+                    let rand = Math.random();
+                    if (rand < 0.1) {
+                        pixel.classList.add('pixel-bts');
+                    } else if (rand < 0.15) {
+                        pixel.classList.add('pixel-bp');
+                    } else if (rand < 0.2) {
+                        pixel.classList.add('pixel-nj');
+                    } else {
+                        pixel.classList.add('pixel-empty');
+                    }
+                    map.appendChild(pixel);
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
-```
+
