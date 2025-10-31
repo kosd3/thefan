@@ -222,21 +222,22 @@
         
         .pixel-map {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(8px, 1fr));
-            grid-auto-flow: dense;
+            grid-template-columns: repeat(20, 1fr); /* More columns for horizontal stretch */
+            grid-template-rows: repeat(10, 1fr); /* Fewer rows for horizontal stretch */
             gap: 2px;
             background: #000;
             border: 2px solid #FDE047;
             padding: 5px;
             border-radius: 8px;
-            height: 400px;
+            height: 400px; /* Fixed height for consistency */
             overflow: hidden;
+            position: relative; /* For absolute positioning of names */
         }
         
         .pixel {
-            width: 100%;
-            padding-bottom: 100%; /* Aspect ratio 1:1 */
             background: #333;
+            position: relative;
+            overflow: hidden; /* Hide name if pixel is too small */
         }
         
         /* Fandom Colors (Example) */
@@ -244,11 +245,38 @@
         .pixel-bp { background-color: #F56EB3; } /* Pink */
         .pixel-nj { background-color: #00A9FF; } /* Blue */
         .pixel-empty { background-color: #2a2a3a; }
-        
-        /* Example of large blocks */
-        .pixel.span-5 { grid-column: span 5; grid-row: span 5; }
-        .pixel.span-3 { grid-column: span 3; grid-row: span 3; }
-        .pixel.span-2 { grid-column: span 2; grid-row: span 2; }
+
+        .artist-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: 1.5vw; /* Responsive font size */
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+            white-space: nowrap;
+            pointer-events: none; /* Allow interaction with pixels underneath */
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .artist-name {
+                font-size: 3vw; /* Smaller on mobile */
+            }
+        }
+        @media (max-width: 480px) {
+            .artist-name {
+                font-size: 4vw; /* Even smaller on very small screens */
+            }
+        }
+
         
         .map-legend h3 {
             font-size: 1.8rem;
@@ -506,6 +534,8 @@
             }
             .pixel-map {
                 height: 300px;
+                grid-template-columns: repeat(15, 1fr); /* Adjust columns for smaller screens */
+                grid-template-rows: repeat(8, 1fr);
             }
             .roles-container {
                 flex-direction: column;
@@ -565,14 +595,17 @@
                 width: 30px;
                 height: 30px;
             }
+            .pixel-map {
+                grid-template-columns: repeat(10, 1fr); /* Further adjust columns for mobile */
+                grid-template-rows: repeat(6, 1fr);
+            }
         }
 
     </style>
 </head>
 <body>
 
-    <!-- 1. Header -->
-    <header class="header">
+    <!-- 1. Header --><header class="header">
         <a href="#" class="logo">THE <span>FAN</span></a>
         <nav>
             <a href="#fandom-land">팬덤 랜드</a>
@@ -583,8 +616,7 @@
         <a href="#" class="btn btn-primary">Launch App</a>
     </header>
 
-    <!-- 2. Hero Section -->
-    <section class="hero">
+    <!-- 2. Hero Section --><section class="hero">
         <div class="container hero-content">
             <div class="subtitle">팬덤 전쟁터</div>
             <h1>아티스트를 빛낼<br>단 하나의 전쟁</h1>
@@ -597,8 +629,7 @@
         </div>
     </section>
 
-    <!-- 3. Fandom Land Feature Section -- MODIFIED -->
-    <section id="fandom-land" class="feature-fandom-land">
+    <!-- 3. Fandom Land Feature Section --><section id="fandom-land" class="feature-fandom-land">
         <div class="container">
             <h2>NFT 팬덤 랜드: Million Dollar Fandom Map</h2>
             <div class="feature-grid">
@@ -626,45 +657,27 @@
         </div>
     </section>
 
-    <!-- 4. Fandom Map Status -->
-    <section class="fandom-map-status">
+    <!-- 4. Fandom Map Status --><section class="fandom-map-status">
         <div class="container">
             <h2 class="subtitle-dark" style="text-align: center; margin-bottom: 50px;">실시간 팬덤 랜드 현황</h2>
             <div class="map-container">
                 <div class="pixel-map">
-                    <!-- This is a simulation. A real implementation would generate this grid dynamically. -->
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-bts span-3" style="grid-column: span 4; grid-row: span 4;"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-nj span-2" style="grid-column: span 2; grid-row: span 3;"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-bp span-3" style="grid-column: span 3; grid-row: span 3;"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-bts" style="grid-column: span 1; grid-row: span 2;"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-nj"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-bp"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <div class="pixel pixel-bts span-2" style="grid-column: span 2; grid-row: span 2;"></div>
-                    <div class="pixel pixel-empty"></div>
-                    <!-- Fill with more empty pixels for visual effect -->
-                    <script>
-                        const map = document.querySelector('.pixel-map');
-                        for (let i = 0; i < 150; i++) {
-                            const pixel = document.createElement('div');
-                            pixel.classList.add('pixel', 'pixel-empty');
-                            if (Math.random() < 0.05) pixel.classList.add('pixel-bts');
-                            if (Math.random() < 0.03) pixel.classList.add('pixel-nj');
-                            if (Math.random() < 0.04) pixel.classList.add('pixel-bp');
-                            map.appendChild(pixel);
-                        }
-                    </script>
-                </div>
+                    <!-- Pre-defined large blocks with artist names --><div class="pixel pixel-bts" style="grid-column: 1 / span 7; grid-row: 1 / span 5;">
+                        <span class="artist-name">BTS</span>
+                    </div>
+                    <div class="pixel pixel-bp" style="grid-column: 8 / span 5; grid-row: 3 / span 7;">
+                        <span class="artist-name">BLACKPINK</span>
+                    </div>
+                    <div class="pixel pixel-nj" style="grid-column: 13 / span 8; grid-row: 1 / span 6;">
+                        <span class="artist-name">NewJeans</span>
+                    </div>
+                    <div class="pixel pixel-bts" style="grid-column: 1 / span 3; grid-row: 6 / span 4;">
+                        <span class="artist-name">BTS</span>
+                    </div>
+                    <div class="pixel pixel-empty" style="grid-column: 4 / span 4; grid-row: 6 / span 5;"></div>
+                    <div class="pixel pixel-empty" style="grid-column: 13 / span 8; grid-row: 7 / span 4;"></div>
+
+                    <!-- Small random pixels generated by script --><!-- Script will append to this element --></div>
                 <div class="map-legend">
                     <h3>Legend</h3>
                     <div class="legend-item">
@@ -688,8 +701,7 @@
         </div>
     </section>
     
-    <!-- 5. Hall of Fame -->
-    <section id="hall-of-fame" class="hall-of-fame">
+    <!-- 5. Hall of Fame --><section id="hall-of-fame" class="hall-of-fame">
         <div class="container hall-of-fame-content">
             <h2>주간 명예의 전당</h2>
             <p>가장 많은 땅을 차지한 1등 아티스트의 이름으로 $TFN(Star)이 기부됩니다.</p>
@@ -731,8 +743,7 @@
         </div>
     </section>
 
-    <!-- 6. How It Works (User Roles) -->
-    <section id="how-it-works" class="how-it-works">
+    <!-- 6. How It Works (User Roles) --><section id="how-it-works" class="how-it-works">
         <div class="container">
             <h2>당신은 누구입니까?</h2>
             <div class="roles-container">
@@ -770,8 +781,7 @@
         </div>
     </section>
 
-    <!-- 7. Global Marketing Section -->
-    <section id="global" class="global-marketing">
+    <!-- 7. Global Marketing Section --><section id="global" class="global-marketing">
         <div class="container">
             <h2>Global Fan Creators Network</h2>
             <p style="text-align: center; max-width: 600px; margin: 0 auto 50px auto;">
@@ -788,8 +798,7 @@
         </div>
     </section>
 
-    <!-- 8. Final CTA -->
-    <section class="cta-final">
+    <!-- 8. Final CTA --><section class="cta-final">
         <div class="container">
             <h2>지금, 팬덤 전쟁이 시작됩니다</h2>
             <p>
@@ -801,58 +810,77 @@
         </div>
     </section>
 
-    <!-- 9. Footer -->
-    <footer class="footer">
+    <!-- 9. Footer --><footer class="footer">
         <div class="social-icons">
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-telegram"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
             <a href="#"><i class="fab fa-discord"></i></a>
         </div>
-        <p>&copy; 2025 THE FAN. All rights reserved.</p>
+        <p>&copy; 2025 THE FAN. All rights reserved. Fandom Finance Ecosystem.</p>
     </footer>
     
-    <!-- Script for pixel map generation -->
-    <script>
+    <!-- Script for pixel map generation --><script>
         document.addEventListener('DOMContentLoaded', function() {
             const map = document.querySelector('.pixel-map');
             if (map) {
-                // Clear placeholder script if any
-                const existingScript = map.querySelector('script');
-                if (existingScript) map.removeChild(existingScript);
-
-                // Add pre-defined blocks
-                const blocks = [
-                    { class: 'pixel-bts', style: 'grid-column: 1 / span 5; grid-row: 1 / span 5;' },
-                    { class: 'pixel-bp', style: 'grid-column: 6 / span 3; grid-row: 2 / span 3;' },
-                    { class: 'pixel-nj', style: 'grid-column: 10 / span 4; grid-row: 1 / span 4;' },
-                    { class: 'pixel-bts', style: 'grid-column: 2 / span 2; grid-row: 6 / span 2;' },
-                    { class: 'pixel-empty', style: 'grid-column: 8 / span 3; grid-row: 5 / span 3;' },
-                ];
-
-                blocks.forEach(block => {
-                    const pixel = document.createElement('div');
-                    pixel.classList.add('pixel', block.class);
-                    pixel.style = block.style;
-                    map.appendChild(pixel);
+                // Clear any existing child elements from the initial HTML structure,
+                // except for the pre-defined blocks which are now part of the HTML
+                Array.from(map.children).forEach(child => {
+                    if (!child.classList.contains('pixel-bts') && !child.classList.contains('pixel-bp') && !child.classList.contains('pixel-nj') && !child.classList.contains('pixel-empty')) {
+                        map.removeChild(child);
+                    }
                 });
 
-                // Fill remaining space with small random pixels
-                for (let i = 0; i < 200; i++) { // Increase number for density
-                    const pixel = document.createElement('div');
-                    pixel.classList.add('pixel');
-                    
-                    let rand = Math.random();
-                    if (rand < 0.1) {
-                        pixel.classList.add('pixel-bts');
-                    } else if (rand < 0.15) {
-                        pixel.classList.add('pixel-bp');
-                    } else if (rand < 0.2) {
-                        pixel.classList.add('pixel-nj');
-                    } else {
-                        pixel.classList.add('pixel-empty');
+                // Get current occupied grid areas to avoid overlap
+                const occupiedAreas = [
+                    { startCol: 1, endCol: 7, startRow: 1, endRow: 5 }, // BTS 1
+                    { startCol: 8, endCol: 12, startRow: 3, endRow: 7 }, // BLACKPINK
+                    { startCol: 13, endCol: 20, startRow: 1, endRow: 6 }, // NewJeans
+                    { startCol: 1, endCol: 3, startRow: 6, endRow: 10 }, // BTS 2
+                    { startCol: 4, endCol: 7, startRow: 6, endRow: 10 }, // Empty block 1
+                    { startCol: 13, endCol: 20, startRow: 7, endRow: 10 }, // Empty block 2
+                ];
+
+                const totalCols = 20;
+                const totalRows = 10;
+                
+                // Function to check if a pixel is occupied
+                function isOccupied(col, row) {
+                    for (const area of occupiedAreas) {
+                        if (col >= area.startCol && col < area.endCol && row >= area.startRow && row < area.endRow) {
+                            return true;
+                        }
                     }
-                    map.appendChild(pixel);
+                    return false;
+                }
+
+                // Fill remaining space with small random pixels
+                for (let row = 1; row <= totalRows; row++) {
+                    for (let col = 1; col <= totalCols; col++) {
+                        if (!isOccupied(col, row)) {
+                            const pixel = document.createElement('div');
+                            pixel.classList.add('pixel', 'pixel-empty');
+                            // Add a slight chance for random fandom pixels for more dynamism
+                            let rand = Math.random();
+                            if (rand < 0.03) {
+                                pixel.classList.remove('pixel-empty');
+                                pixel.classList.add('pixel-bts');
+                            } else if (rand < 0.06) {
+                                pixel.classList.remove('pixel-empty');
+                                pixel.classList.add('pixel-bp');
+                            } else if (rand < 0.09) {
+                                pixel.classList.remove('pixel-empty');
+                                pixel.classList.add('pixel-nj');
+                            }
+                            pixel.style.gridColumn = `${col}`;
+                            pixel.style.gridRow = `${row}`;
+                            map.appendChild(pixel);
+                            
+                            // Mark this pixel as occupied for subsequent checks
+                            occupiedAreas.push({ startCol: col, endCol: col + 1, startRow: row, endRow: row + 1 });
+                        }
+                    }
                 }
             }
         });
